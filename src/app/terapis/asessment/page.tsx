@@ -28,8 +28,10 @@ interface Assessment {
   assessor: string | null;
   scheduled_date?: string;
   scheduled_time?: string;
+  completed_at?: string; // ⬅️ TAMBAHAN
   status: string;
 }
+
 
 export default function AssessmentPage() {
   const router = useRouter();
@@ -243,8 +245,11 @@ export default function AssessmentPage() {
                         </td>
 
                         <td className="px-3 py-2">{item.scheduled_date}</td>
-                        <td className="px-3 py-2">{item.scheduled_time}</td>
-
+                        <td className="px-3 py-2">
+  {activeFilter === "Selesai"
+    ? item.completed_at
+    : item.scheduled_time}
+</td>
                         <td className="px-3 py-2 relative">
                           <button
                             onClick={() => toggleDropdown(item.assessment_id)}
