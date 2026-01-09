@@ -64,7 +64,7 @@ type AnswersState = Record<string, Record<number, Answer>>;
 // ==========================================================
 // MAP ANSWERS → PAYLOAD
 // ==========================================================
-export const mapAnswersToPayloadBE = (
+const mapAnswersToPayloadBE = (
   answersState: AnswersState,
   questionsData: QuestionsData
 ) => {
