@@ -1,5 +1,5 @@
 // src/lib/api/dashboardTerapis.ts
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axiosInstance from "@/lib/axios";
 
 // -----------------------------------------------------

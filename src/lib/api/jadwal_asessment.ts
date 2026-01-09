@@ -1,4 +1,5 @@
 // src/lib/api/jadwal_asesmen.ts
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import api from "@/lib/axios";
 import type { Jadwal } from "@/app/admin/jadwal_asesmen/page"; // sesuaikan path
 

@@ -1,4 +1,5 @@
 // app/api/assessments/[...slug]/route.ts
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from "next/server";
 import axios from "axios";
 

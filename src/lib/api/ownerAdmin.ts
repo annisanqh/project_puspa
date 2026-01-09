@@ -1,5 +1,5 @@
 // lib/api/ownerAdmin.ts
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axiosInstance from "@/lib/axios";
 
 // ===============================

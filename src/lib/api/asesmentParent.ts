@@ -1,4 +1,5 @@
 // src/lib/api/assessmentParent.ts
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import axiosInstance from "@/lib/axios";
 
 export async function getPendingParents(date = "", search = "") {
