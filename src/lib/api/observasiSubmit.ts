@@ -126,3 +126,4 @@ export const getObservationAnswers = async (observation_id: string): Promise<any
     return [];
   }
 };
+

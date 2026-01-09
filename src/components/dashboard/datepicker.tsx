@@ -1,10 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useState } from "react";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
-import { updateAssessmentDate } from "@/lib/api/observasiSubmit";
+import { updateObservationSchedule } from "@/lib/api/jadwal_observasi";
 
 interface DatePickerProps {
   pasien: { 
@@ -29,32 +28,36 @@ export default function DatePicker({
   const [saving, setSaving] = useState(false);
 
   const handleSave = async () => {
-    setSaving(true);
-    try {
-const formattedDate = date.toLocaleDateString("en-CA");
+  setSaving(true);
+  try {
+    const formattedDate = date.toLocaleDateString("en-CA");
 
-      // ✅ kalau punya observation_id → kirim ke API
-      if (pasien.observation_id) {
-        const res = await updateAssessmentDate(pasien.observation_id, formattedDate);
-        if (res.success) {
-          alert(`Tanggal observasi untuk ${pasien.nama} berhasil diperbarui ✅`);
-          onUpdate?.(); // refresh data
-        } else {
-          alert("Gagal memperbarui tanggal obervasi ❌");
-        }
-      } 
-      // ✅ kalau tidak punya observation_id → simpan lokal (jadwal page)
-      else {
-        onSave?.(date);
+    if (pasien.observation_id) {
+      const res = await updateObservationSchedule(
+        Number(pasien.observation_id),
+        formattedDate,
+        "00:00" // ⬅ jam dummy / default
+      );
+
+      if (res?.success !== false) {
+        alert('Tanggal observasi untuk ${pasien.nama} berhasil diperbarui ✅');
+        onUpdate?.();
+      } else {
+        alert("Gagal memperbarui tanggal observasi ❌");
       }
-
-      onClose();
-    } catch {
-      alert("Terjadi kesalahan saat menyimpan tanggal asesmen.");
-    } finally {
-      setSaving(false);
+    } else {
+      onSave?.(date);
     }
-  };
+
+    onClose();
+  } catch (err) {
+    console.error(err);
+    alert("Terjadi kesalahan saat menyimpan tanggal asesmen.");
+  } finally {
+    setSaving(false);
+  }
+};
+
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/40 z-50">
